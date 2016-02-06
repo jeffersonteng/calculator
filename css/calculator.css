@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.calculator {
+    background-color: #036;
+    min-width: 200px;
+    min-height: 400px;
+    width: 30%;
+    height: 70%;
+    border: 1px solid white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.screen {
+    width: 95%;
+    height: 18%;
+    background-color: #469;
+}
+
+.keyboard {
+    width: 98.5%;
+    height: 68%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+.key {
+    background-color: #E8E8E8;
+    width: 21%;
+    height: 17%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
