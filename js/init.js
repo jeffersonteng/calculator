@@ -11,18 +11,114 @@
         ".", "0", "Ans", "="
     ];
 
+    var keyTypes = {
+        "AC": "operator",
+        "CE": "operator",
+        "%": "operator",
+        "/": "operator",
+        "7": "entry",
+        "8": "entry",
+        "9": "entry",
+        "*": "operator",
+        "4": "entry",
+        "5": "entry",
+        "6": "entry",
+        "-": "operator",
+        "1": "entry",
+        "2": "entry",
+        "3": "entry",
+        "+": "operator",
+        ".": "entry",
+        "0": "entry",
+        "Ans": "operator",
+        "=": "operator"
+    };
+
+    var entryReg = null;
+    var opReg = null;
+    var shouldClear = false;
+    var screen = $('.screen');
+
+    function getResultBinaryOp(entry1, op, entry2) {
+        var arg1 = parseFloat(entry1);
+        var arg2 = parseFloat(entry2);
+
+        switch(op) {
+            case "/":
+                return arg1 / arg2;
+            case "*":
+                return arg1 * arg2;
+            case "+":
+                return arg1 + arg2;
+            case "-":
+                return arg1 - arg2;
+            default:
+                alert("error not a binary");
+        }
+
+    }
+
+    var btnHandler = function() {
+        var $this = $(this);
+        var btnText = $this.text();
+
+        if (keyTypes[btnText] === "entry") {
+            if (shouldClear) {
+                screen.empty();
+                shouldClear = false;
+            }
+            screen.append(btnText);
+        } else {
+            if (entryReg === null && opReg === null) {
+                entryReg = screen.text();
+                opReg = btnText;
+            } else {
+                // set screen = entryReg (opReg) screen
+                screen.text(getResultBinaryOp(entryReg, opReg, screen.text()));
+                entryReg = null;
+                opReg = null;
+            }
+            shouldClear = true;
+        }
+    };
+
     $(document).ready(function() {
-        for (var key=0; key < keyArr.length; key++) {
+        for (var idx=0; idx < keyArr.length; idx++) {
             var btn = document.createElement("button");
             btn.className = "key";
-            var textNode = document.createTextNode(keyArr[key]);
+            var textNode = document.createTextNode(keyArr[idx]);
             btn.appendChild(textNode);
             $(".keyboard").append(btn);
+            $(btn).on("click", btnHandler);
+
+            //if (typesArr[idx] === "entry") {
+            //    if (shouldClear) {
+            //        entryReg = null;
+            //        opReg = null;
+            //    }
+            //
+            //
+            //    ////////////////////
+            //    ////////////////////
+            //
+            //    // if registers empty, then really just append
+            //
+            //    // if registers are full, then clear the screen
+            //
+            //    $(btn).on("click", function() {
+            //        if (entryReg !== null && opReg !== null) {
+            //            screen.clear();
+            //        }
+            //        $(".screen").append($(this).text());
+            //    });
+            //} else {
+            //    var screen = $(".screen");
+            //
+            //    $(btn).on("click", function() {
+            //        entryReg = screen.text();
+            //        opReg = $(this).text();
+            //    });
+            //}
         }
     });
-
-    $(btn).onclick(function() {
-        
-    });
-
 })();

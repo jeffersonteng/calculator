@@ -23,6 +23,13 @@
     width: 95%;
     height: 18%;
     background-color: #469;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    color: white;
+    font-family: sans-serif;
+    font-size: 2rem;
 }
 
 .keyboard {
