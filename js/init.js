@@ -13,12 +13,16 @@
 
     $(document).ready(function() {
         for (var key=0; key < keyArr.length; key++) {
-            var keyDiv = document.createElement("div");
-            keyDiv.className = "key";
+            var btn = document.createElement("button");
+            btn.className = "key";
             var textNode = document.createTextNode(keyArr[key]);
-            keyDiv.appendChild(textNode);
-            $(".keyboard").append(keyDiv);
+            btn.appendChild(textNode);
+            $(".keyboard").append(btn);
         }
+    });
+
+    $(btn).onclick(function() {
+        
     });
 
 })();
