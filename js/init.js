@@ -118,35 +118,6 @@
             btn.appendChild(textNode);
             $(".keyboard").append(btn);
             $(btn).on("click", btnHandler);
-
-            //if (typesArr[idx] === "entry") {
-            //    if (shouldClear) {
-            //        entryReg = null;
-            //        opReg = null;
-            //    }
-            //
-            //
-            //    ////////////////////
-            //    ////////////////////
-            //
-            //    // if registers empty, then really just append
-            //
-            //    // if registers are full, then clear the screen
-            //
-            //    $(btn).on("click", function() {
-            //        if (entryReg !== null && opReg !== null) {
-            //            screen.clear();
-            //        }
-            //        $(".screen").append($(this).text());
-            //    });
-            //} else {
-            //    var screen = $(".screen");
-            //
-            //    $(btn).on("click", function() {
-            //        entryReg = screen.text();
-            //        opReg = $(this).text();
-            //    });
-            //}
         }
     });
 })();
