@@ -90,18 +90,19 @@
             }
         } else if (keyTypes[btnText] === "binary") {
             if (entryReg === null && opReg === null) {
-                entryReg = screen.text();
                 opReg = btnText;
             } else {
                 // set screen = entryReg (opReg) screen
                 screen.text(getResultBinaryOp(entryReg, opReg, screen.text()));
-                entryReg = null;
-                opReg = null;
             }
+            entryReg = screen.text();
             shouldClear = true;
         } else if (keyTypes[btnText] === "unary") {
             screen.text(getResultUnaryOp(screen.text(), btnText));
         } else if (keyTypes[btnText] === "result") {
+            if (entryReg === null || opReg === null || screen === null) {
+                return;
+            }
             // set screen = entryReg (opReg) screen
             screen.text(getResultBinaryOp(entryReg, opReg, screen.text()));
             entryReg = null;
