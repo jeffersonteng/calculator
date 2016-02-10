@@ -20,7 +20,7 @@
 }
 
 .screen {
-    width: 95%;
+    width: 90%;
     height: 18%;
     background-color: #469;
     display: flex;
@@ -34,7 +34,7 @@
 
 .keyboard {
     width: 98.5%;
-    height: 68%;
+    height: 70%;
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;

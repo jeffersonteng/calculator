@@ -12,32 +12,48 @@
     ];
 
     var keyTypes = {
-        "AC": "operator",
-        "CE": "operator",
-        "%": "operator",
-        "/": "operator",
+        "AC": "unary",
+        "CE": "unary",
+        "%": "unary",
+
+        "/": "binary",
+        "*": "binary",
+        "-": "binary",
+        "+": "binary",
+
         "7": "entry",
         "8": "entry",
         "9": "entry",
-        "*": "operator",
         "4": "entry",
         "5": "entry",
         "6": "entry",
-        "-": "operator",
         "1": "entry",
         "2": "entry",
         "3": "entry",
-        "+": "operator",
         ".": "entry",
         "0": "entry",
-        "Ans": "operator",
-        "=": "operator"
+
+        "Ans": "result",
+        "=": "result"
     };
 
     var entryReg = null;
     var opReg = null;
     var shouldClear = false;
     var screen = $('.screen');
+
+    function getResultUnaryOp(screenText, unaryOp) {
+        var arg1 = parseFloat(screenText);
+
+        switch(unaryOp) {
+            case "AC":
+                return "0";
+            case "CE":
+                return screenText.slice(0, -1) || 0;
+            case "%":
+                return arg1 / 100;
+        }
+    }
 
     function getResultBinaryOp(entry1, op, entry2) {
         var arg1 = parseFloat(entry1);
@@ -67,8 +83,12 @@
                 screen.empty();
                 shouldClear = false;
             }
-            screen.append(btnText);
-        } else {
+            if (screen.text() === "0") {
+                screen.text(btnText);
+            } else {
+                screen.append(btnText);
+            }
+        } else if (keyTypes[btnText] === "binary") {
             if (entryReg === null && opReg === null) {
                 entryReg = screen.text();
                 opReg = btnText;
@@ -79,6 +99,13 @@
                 opReg = null;
             }
             shouldClear = true;
+        } else if (keyTypes[btnText] === "unary") {
+            screen.text(getResultUnaryOp(screen.text(), btnText));
+        } else if (keyTypes[btnText] === "result") {
+            // set screen = entryReg (opReg) screen
+            screen.text(getResultBinaryOp(entryReg, opReg, screen.text()));
+            entryReg = null;
+            opReg = null;
         }
     };
 
